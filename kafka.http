@@ -1,0 +1,12 @@
+###
+POST http://localhost:3010
+Content-Type: application/json
+
+{
+  "userId": "saa",
+  "price": 2000
+}
+
+###
+POST http://localhost:3010/kafka
+Content-Type: application/json
