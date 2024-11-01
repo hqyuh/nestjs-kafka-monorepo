@@ -12,10 +12,12 @@ export class TestConsumer implements OnModuleInit {
   async onModuleInit() {
     await this.consumer.consume({
       topics: { topics: [`${this.config.kafka.topic}`] },
-      config: { groupId: 'test-consumer' },
+      config: { groupId: 'first-consumer' },
       onMessage: async (message) => {
-        console.log('Received message at test-consumer');
-        console.log({ value: message.value.toString() });
+        console.log('Received message at first-consumer');
+        console.log({
+          value: message.value.toString(),
+        });
       },
     });
   }

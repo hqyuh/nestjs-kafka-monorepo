@@ -1,10 +1,22 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Inject, OnModuleInit } from '@nestjs/common';
 import { BillingAppService } from './billing-app.service';
-import { EventPattern } from '@nestjs/microservices';
+import { ClientKafka, EventPattern } from '@nestjs/microservices';
+
+export interface UserData {
+  userId: string;
+  price: number;
+}
 
 @Controller()
-export class BillingAppController {
-  constructor(private readonly billingAppService: BillingAppService) {}
+export class BillingAppController implements OnModuleInit {
+  constructor(
+    private readonly billingAppService: BillingAppService,
+    @Inject(`AUTH_SERVICE`) private readonly authClient: ClientKafka,
+  ) {}
+
+  onModuleInit() {
+    this.authClient.subscribeToResponseOf('create_user');
+  }
 
   @Get()
   getHello(): string {
@@ -12,8 +24,7 @@ export class BillingAppController {
   }
 
   @EventPattern('order_created')
-  handleOrderCreated(data: any) {
-    console.log('Order created event received');
+  handleOrderCreated(data: UserData) {
     console.log(data);
     this.billingAppService.handleOrderCreated(data);
   }

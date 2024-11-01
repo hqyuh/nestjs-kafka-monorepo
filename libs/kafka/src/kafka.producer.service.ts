@@ -19,6 +19,7 @@ export class KafkaProducerService implements OnApplicationShutdown {
     const producer = await this.getProducer(topic!);
     await producer.produce(message);
   }
+
   private async getProducer(topic: string) {
     let producer = this.producers.get(topic);
     if (!producer) {
@@ -28,5 +29,6 @@ export class KafkaProducerService implements OnApplicationShutdown {
     }
     return producer;
   }
+
   onApplicationShutdown() {}
 }

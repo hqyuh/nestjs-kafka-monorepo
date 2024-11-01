@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { KafkaModule } from '@app/kafka';
 import { AppConfigModule } from '@app/config';
-import { TestConsumer } from './consumer';
+import { TestConsumer } from './test.consumer';
 @Module({
   imports: [
     KafkaModule,
