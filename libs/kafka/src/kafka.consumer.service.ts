@@ -2,6 +2,7 @@ import { AppConfigService } from '@app/config';
 import { Injectable, OnApplicationShutdown } from '@nestjs/common';
 import { ConsumerConfig, ConsumerSubscribeTopics, KafkaMessage } from 'kafkajs';
 import { KafkaConsumer } from './consumer.service';
+import { DatabaseService } from '@app/database';
 
 interface KafkajsConsumerOptions {
   topics: ConsumerSubscribeTopics;
@@ -19,11 +20,15 @@ export interface IConsumer {
 export class KafkaConsumerService implements OnApplicationShutdown {
   private readonly consumers: IConsumer[] = [];
 
-  constructor(private readonly configService: AppConfigService) {}
+  constructor(
+    private readonly configService: AppConfigService,
+    private readonly databaseService: DatabaseService,
+  ) {}
 
   async consume({ topics, config, onMessage }: KafkajsConsumerOptions) {
     const consumer = new KafkaConsumer(
       topics,
+      this.databaseService,
       config,
       this.configService.kafka.broker,
     );

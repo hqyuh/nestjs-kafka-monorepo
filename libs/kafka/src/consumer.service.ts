@@ -8,6 +8,7 @@ import {
 import { Logger } from '@nestjs/common';
 import { IConsumer } from './kafka.consumer.service';
 import * as retry from 'async-retry';
+import { DatabaseService } from '@app/database';
 
 export const sleep = (timeout: number) => {
   return new Promise<void>((resolve) => setTimeout(resolve, timeout));
@@ -20,6 +21,7 @@ export class KafkaConsumer implements IConsumer {
 
   constructor(
     private readonly topic: ConsumerSubscribeTopics,
+    private readonly databaseService: DatabaseService,
     config: ConsumerConfig,
     broker: string,
   ) {
@@ -44,13 +46,21 @@ export class KafkaConsumer implements IConsumer {
               ),
           });
         } catch (err) {
-          console.log('🐔 =>  them:', err);
-          // handle failure of message
-          // write then to DB table or log them
-          // better write to DATABASE
+          this.logger.error(
+            'Error consuming message. Adding to dead letter queue...',
+            err,
+          );
+          await this.addMessageToDlq(message);
         }
       },
     });
+  }
+
+  private async addMessageToDlq(message: KafkaMessage) {
+    await this.databaseService
+      .getDbHandle()
+      .collection('dlq')
+      .insertOne({ value: message.value, topic: this.topic.topics });
   }
 
   async connect() {
