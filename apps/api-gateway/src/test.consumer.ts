@@ -1,5 +1,5 @@
 import { AppConfigService } from '@app/config';
-import { KafkaConsumerService } from '@app/kafka/kafka.consumer.service';
+import { KafkaConsumerService } from '@app/kafka/consumer/kafka.consumer.service';
 import { Injectable, OnModuleInit } from '@nestjs/common';
 
 @Injectable()

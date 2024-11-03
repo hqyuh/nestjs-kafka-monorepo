@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateOrderDto } from './dto/app.dto';
-import { KafkaProducerService } from '@app/kafka/kafka.producer.service';
+import { KafkaProducerService } from '@app/kafka/producer/kafka.producer.service';
 
 @Controller()
 export class AppController {

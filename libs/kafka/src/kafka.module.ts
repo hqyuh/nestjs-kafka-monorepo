@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppConfigModule } from '@app/config';
-import { KafkaConsumerService } from './kafka.consumer.service';
-import { KafkaProducerService } from './kafka.producer.service';
+import { KafkaConsumerService } from './consumer/kafka.consumer.service';
+import { KafkaProducerService } from './producer/kafka.producer.service';
 
 @Module({
   imports: [AppConfigModule],
