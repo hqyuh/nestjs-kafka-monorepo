@@ -3,8 +3,9 @@ POST http://localhost:3010
 Content-Type: application/json
 
 {
-  "userId": "hqhuy",
-  "price": 2000
+  "name": "HQH4",
+  "age": 24,
+  "gender": "male"
 }
 
 ###

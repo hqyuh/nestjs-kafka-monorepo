@@ -1,12 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { OrderCreatedEvent } from './dto/order-created';
 import { ClientKafka } from '@nestjs/microservices';
-import { UserCreatedEvent } from 'apps/billing-app/src/dto/create-user.dto';
-
-export interface UserData {
-  userId: string;
-  price: number;
-}
+import { UserCreateEvent } from 'apps/billing-app/src/dto/create-user.dto';
+import { IStudent } from '@app/database/dto/user.interface';
 
 @Injectable()
 export class BillingAppService {
@@ -19,11 +15,11 @@ export class BillingAppService {
   }
 
   handleOrderCreated(data: OrderCreatedEvent) {
-    const { userId, price } = data;
+    const { name, age, gender } = data;
     this.authClient
-      .send(`create_user`, new UserCreatedEvent(userId, price))
-      .subscribe((user: UserData) => {
-        console.log('Call Billing => ', user);
+      .send(`create_user`, new UserCreateEvent(name, age, gender))
+      .subscribe((user: IStudent) => {
+        console.log('Create user successfully => ', user.name, user.age);
       });
   }
 }

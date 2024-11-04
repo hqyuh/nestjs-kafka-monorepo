@@ -5,10 +5,12 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { KafkaModule } from '@app/kafka';
 import { AppConfigModule } from '@app/config';
 import { TestConsumer } from './test.consumer';
+import { DatabaseModule } from '@app/database';
 @Module({
   imports: [
     KafkaModule,
     AppConfigModule,
+    DatabaseModule,
     ClientsModule.register([
       {
         name: 'BILLING_SERVICE',

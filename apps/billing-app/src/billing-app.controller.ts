@@ -3,8 +3,9 @@ import { BillingAppService } from './billing-app.service';
 import { ClientKafka, EventPattern } from '@nestjs/microservices';
 
 export interface UserData {
-  userId: string;
-  price: number;
+  name: string;
+  age: number;
+  gender: string;
 }
 
 @Controller()

@@ -16,7 +16,7 @@ export class AppService {
   createOrder(payload: CreateOrderDto) {
     this.billingProxyClient.emit(
       'order_created',
-      new OrderCreatedEvent('H1', payload.userId, payload.price),
+      new OrderCreatedEvent(payload.name, payload.age, payload.gender),
     );
   }
 }

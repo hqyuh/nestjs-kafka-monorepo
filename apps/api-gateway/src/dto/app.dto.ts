@@ -1,4 +1,5 @@
 export class CreateOrderDto {
-  userId: string;
-  price: number;
+  name: string;
+  age: number;
+  gender: string;
 }

@@ -2,6 +2,12 @@ import { Controller, Get } from '@nestjs/common';
 import { AuthAppService } from './auth-app.service';
 import { MessagePattern } from '@nestjs/microservices';
 
+export interface UserData {
+  name: string;
+  age: number;
+  gender: string;
+}
+
 @Controller()
 export class AuthAppController {
   constructor(private readonly authAppService: AuthAppService) {}
@@ -12,8 +18,8 @@ export class AuthAppController {
   }
 
   @MessagePattern(`create_user`)
-  getUser(data: any) {
-    console.log('Get user event received => ', data);
-    return { userId: data.userId, price: data.price };
+  async createUser(data: UserData) {
+    const createdUser = await this.authAppService.create(data);
+    return createdUser;
   }
 }
