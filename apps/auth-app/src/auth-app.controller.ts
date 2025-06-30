@@ -19,6 +19,7 @@ export class AuthAppController {
 
   @MessagePattern(`create_user`)
   async createUser(data: UserData) {
+    console.log('auth here');
     const createdUser = await this.authAppService.create(data);
     return createdUser;
   }

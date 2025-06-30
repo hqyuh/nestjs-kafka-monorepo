@@ -26,7 +26,7 @@ export class BillingAppController implements OnModuleInit {
 
   @EventPattern('order_created')
   handleOrderCreated(data: UserData) {
-    console.log(data);
+    console.log('11 => ', data);
     this.billingAppService.handleOrderCreated(data);
   }
 }
