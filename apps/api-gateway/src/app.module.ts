@@ -18,7 +18,7 @@ import { DatabaseModule } from '@app/database';
         options: {
           client: {
             clientId: 'billing',
-            brokers: ['localhost:9094'],
+            brokers: ['localhost:9094', 'localhost:9095', 'localhost:9096'],
           },
           consumer: {
             groupId: 'billing-consumer',
