@@ -17,6 +17,9 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
           consumer: {
             groupId: `auth-consumer`,
           },
+          subscribe: {
+            fromBeginning: true,
+          },
         },
       },
     ]),

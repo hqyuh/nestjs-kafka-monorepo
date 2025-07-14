@@ -3,8 +3,8 @@ POST http://localhost:3010
 Content-Type: application/json
 
 {
-  "name": "HQH4",
-  "age": 24,
+  "name": "HQH",
+  "age": 50,
   "gender": "male"
 }
 

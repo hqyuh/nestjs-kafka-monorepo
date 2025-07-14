@@ -23,6 +23,9 @@ import { DatabaseModule } from '@app/database';
           consumer: {
             groupId: 'billing-consumer',
           },
+          subscribe: {
+            fromBeginning: true,
+          },
         },
       },
     ]),

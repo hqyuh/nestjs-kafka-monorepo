@@ -6,6 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "pre-start": "node -r tsconfig-paths/register -r ts-node/register create-topic-kafka.ts",
+    "check-leader": "node -r tsconfig-paths/register -r ts-node/register check-leader.ts",
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start:dev": "concurrently -c \"cyan.bold, green.bold, blue.bold\" \"npm:dev-*\"",
